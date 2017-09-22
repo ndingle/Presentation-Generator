@@ -1,0 +1,28 @@
+﻿<Window x:Class="Presentation_Day_Generator.ItemTest"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation_Day_Generator"
+        mc:Ignorable="d"
+        Title="ItemTest" Height="80.641" Width="328.412">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70" />
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="0" Source="Images/excel.png" />
+        <TextBlock Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="20">File Name</TextBlock>
+        <TextBlock Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="20">Type of File</TextBlock>
+
+    </Grid>
+   
+    
+</Window>
