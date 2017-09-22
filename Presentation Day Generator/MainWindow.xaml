@@ -1,0 +1,32 @@
+﻿<Window x:Class="Presentation_Day_Generator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Presentation_Day_Generator"
+        mc:Ignorable="d"
+        Title="Presentation Day Generator" Height="380.223" Width="312.953">
+
+    <Window.Resources>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="DarkOrange" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Column="0" Grid.Row="0" Source="Images/Drag and drop.png" />
+        <ListBox Grid.Column="0" Grid.Row="0"></ListBox>
+
+
+    </Grid>
+</Window>
