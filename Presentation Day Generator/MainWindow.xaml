@@ -24,8 +24,16 @@
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Grid.Row="0" Source="Images/Drag and drop.png" />
-        <ListBox Grid.Column="0" Grid.Row="0"></ListBox>
+        <Image Grid.Column="0" Grid.Row="0" Source="Images/Drag and drop.png" x:Name="imgDragFiles" />
+        <ListBox Grid.Column="0" Grid.Row="0" x:Name="lstFiles">
+
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
 
 
     </Grid>
