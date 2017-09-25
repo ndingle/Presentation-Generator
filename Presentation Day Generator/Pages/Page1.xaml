@@ -14,11 +14,15 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Grid.Row="0" x:Name="imgDragFiles" AllowDrop="True" Drop="imgDragFiles_Drop" Margin="50" Source="/Presentation Day Generator;component/Images/Drag and drop.png" />
-        <ListBox Grid.Column="0" Grid.Row="0" 
+        <Rectangle Fill="DarkOrange" />
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" FontSize="24" Foreground="White">Add data files</TextBlock>
+
+        <Image Grid.Column="0" Grid.Row="1" x:Name="imgDragFiles" AllowDrop="True" Drop="imgDragFiles_Drop" Margin="50" Source="/Presentation Day Generator;component/Images/Drag and drop.png" />
+        <ListBox Grid.Column="0" Grid.Row="1" 
                  x:Name="lstFiles" 
                  Background="{x:Null}" 
                  HorizontalContentAlignment="Stretch"  

@@ -25,6 +25,7 @@ namespace Presentation_Day_Generator
 
         //The variables of niceness
         List<ExcelFile> dataFiles;
+        int currentPage = 1;
 
 
         public MainWindow()
@@ -35,7 +36,8 @@ namespace Presentation_Day_Generator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            SettingsWindow settings = new SettingsWindow();
+            settings.Show();
             //Load the first page
             Page1 newPage = new Page1();
             pageFrame.Content = newPage;
@@ -45,14 +47,35 @@ namespace Presentation_Day_Generator
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
+            NextPage();
+        }
 
-            //Page1 to Page2 transition work
-            dataFiles = ((Page1)pageFrame.Content).GetFiles();
 
-            MessageBox.Show(dataFiles.Count.ToString());
+        void NextPage()
+        {
 
-            Page2 newPage = new Page2();
-            pageFrame.Content = newPage;
+            Page newPage = null;
+
+
+            if (currentPage == 1)
+            {
+                //Collect the data files
+                dataFiles = ((Page1)pageFrame.Content).GetFiles();
+                newPage = new Page2();
+            }
+            else if (currentPage == 2)
+            {
+                newPage = new Page3();
+            }
+
+
+            //If we have a new page, move on
+            if (newPage != null)
+            {
+                currentPage++;
+                pageFrame.Content = newPage;
+            }
+
 
         }
 

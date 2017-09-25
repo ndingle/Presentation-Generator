@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Presentation_Day_Generator.Pages
+namespace Presentation_Day_Generator
 {
     /// <summary>
     /// Interaction logic for Page3.xaml
@@ -23,6 +23,12 @@ namespace Presentation_Day_Generator.Pages
         public Page3()
         {
             InitializeComponent();
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settings = new SettingsWindow();
+            settings.ShowDialog();
         }
     }
 }
