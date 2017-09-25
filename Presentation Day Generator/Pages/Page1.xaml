@@ -1,0 +1,57 @@
+﻿<Page x:Class="Presentation_Day_Generator.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Presentation_Day_Generator"
+      mc:Ignorable="d"
+      Title="Page1" Loaded="Page_Loaded">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Image Grid.Column="0" Grid.Row="0" x:Name="imgDragFiles" AllowDrop="True" Drop="imgDragFiles_Drop" Margin="50" Source="/Presentation Day Generator;component/Images/Drag and drop.png" />
+        <ListBox Grid.Column="0" Grid.Row="0" 
+                 x:Name="lstFiles" 
+                 Background="{x:Null}" 
+                 HorizontalContentAlignment="Stretch"  
+                 AllowDrop="True" 
+                 Drop="lstFiles_Drop" 
+                 BorderBrush="{x:Null}" 
+                 ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image x:Name="imgFile" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Source="/Presentation Day Generator;component/Images/excel.png" />
+                        <TextBlock x:Name="txbFilename" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="18" Text="{Binding Filename}"></TextBlock>
+                        <TextBlock x:Name="txbFiletype" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Segoe UI Light" FontSize="18" Text="{Binding Filetype}"></TextBlock>
+                        <Button x:Name="btnDelete" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Segoe UI Light" FontSize="18" Background="{x:Null}" Click="btnDelete_Clicked">🗑</Button>
+
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Page>

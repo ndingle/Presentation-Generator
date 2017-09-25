@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Presentation_Day_Generator
 {
     /// <summary>
-    /// Interaction logic for ItemTest.xaml
+    /// Interaction logic for Page2.xaml
     /// </summary>
-    public partial class ItemTest : Window
+    public partial class Page2 : Page
     {
-        public ItemTest()
+        public Page2()
         {
             InitializeComponent();
         }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation_Day_Generator"
         mc:Ignorable="d"
-        Title="Presentation Day Generator" Height="445.592" Width="386.56" Loaded="Window_Loaded">
+        Title="Presentation Day Generator" Height="537" Width="411" Loaded="Window_Loaded">
 
     <Grid Background="#FFFF9C00">
 
@@ -18,38 +18,13 @@
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
-        <Image Grid.Column="0" Grid.Row="0" Source="Images/Drag and drop.png" x:Name="imgDragFiles" AllowDrop="True" Drop="imgDragFiles_Drop" Margin="20" />
-        <ListBox Grid.Column="0" Grid.Row="0" x:Name="lstFiles" Background="{x:Null}" HorizontalContentAlignment="Stretch"  AllowDrop="True" Drop="lstFiles_Drop" BorderBrush="{x:Null}">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
+        <Frame x:Name="pageFrame" Padding="0" Grid.Column="0" Grid.Row="0" NavigationUIVisibility="Hidden" />
 
-                    <Grid>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-
-                        <Image x:Name="imgFile" Grid.Row="0" Grid.Column="0" Source="Images/excel.png" HorizontalAlignment="Left" />
-                        <TextBlock x:Name="txbFilename" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="20" Text="{Binding Filename}"></TextBlock>
-                        <TextBlock x:Name="txbFiletype" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Segoe UI Light" FontSize="20" Text="{Binding Filetype}"></TextBlock>
-
-                    </Grid>
-
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-
-        </ListBox>
-
-        <Button Grid.Column="0" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}">
+        <Button x:Name="btnNext" Grid.Column="0" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
             <Image Source="Images/next.png" />
         </Button>
+
 
     </Grid>
 </Window>

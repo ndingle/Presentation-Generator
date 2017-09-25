@@ -8,7 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace Presentation_Day_Generator
 {
-    class ExcelFile : INotifyPropertyChanged
+    public class ExcelFile : INotifyPropertyChanged
     {
 
         private string m_Filepath;

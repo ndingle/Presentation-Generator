@@ -23,9 +23,8 @@ namespace Presentation_Day_Generator
     public partial class MainWindow : Window
     {
 
-
-        //Window variables go here!
-        ObservableCollection<ExcelFile> excelFiles;
+        //The variables of niceness
+        List<ExcelFile> dataFiles;
 
 
         public MainWindow()
@@ -36,42 +35,27 @@ namespace Presentation_Day_Generator
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            excelFiles = new ObservableCollection<ExcelFile>();
-            lstFiles.ItemsSource = excelFiles;
+
+            //Load the first page
+            Page1 newPage = new Page1();
+            pageFrame.Content = newPage;
+            
         }
 
 
-        void CompleteDrop(IDataObject data)
+        private void btnNext_Click(object sender, RoutedEventArgs e)
         {
 
-            string[] files = (string[])data.GetData(DataFormats.FileDrop);
+            //Page1 to Page2 transition work
+            dataFiles = ((Page1)pageFrame.Content).GetFiles();
 
-            //Ensure they are excel files
-            foreach (string file in files)
-            {
+            MessageBox.Show(dataFiles.Count.ToString());
 
-                //Get the extension of the file
-                string extension = file.Substring(file.LastIndexOf('.') + 1);
-
-                //Are they excel?
-                if (extension == "xlsx" || extension == "xls")
-                {
-                    excelFiles.Add(new ExcelFile(file));
-                    imgDragFiles.Visibility = Visibility.Hidden;
-                }
-
-            }
+            Page2 newPage = new Page2();
+            pageFrame.Content = newPage;
 
         }
 
-        private void lstFiles_Drop(object sender, DragEventArgs e)
-        {
-            CompleteDrop(e.Data);
-        }
 
-        private void imgDragFiles_Drop(object sender, DragEventArgs e)
-        {
-            CompleteDrop(e.Data);
-        }
     }
 }
