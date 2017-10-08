@@ -25,7 +25,7 @@
                  AllowDrop="True" 
                  Drop="lstFiles_Drop" 
                  BorderBrush="{x:Null}" 
-                 ItemsSource="{Binding}">
+                 ItemsSource="{Binding}" DragEnter="lstFiles_DragEnter">
             <ListBox.ItemTemplate>
                 <DataTemplate>
 

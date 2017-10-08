@@ -50,7 +50,7 @@ namespace Presentation_Day_Generator
             {
                 
                 excelFiles.Add(new ExcelFile(file));
-                imgDragFiles.Visibility = Visibility.Hidden;
+                //imgDragFiles.Visibility = Visibility.Hidden;
 
             }
 
@@ -74,10 +74,15 @@ namespace Presentation_Day_Generator
 
             List<ExcelFile> result = new List<ExcelFile>();
 
-            foreach(ExcelFile file in excelFiles)
+            if (excelFiles != null)
             {
-                if (file.Filetype.ToUpper() != "Invalid file")
-                    result.Add(file);
+
+                foreach (ExcelFile file in excelFiles)
+                {
+                    if (file.Filetype.ToUpper() != "Invalid file")
+                        result.Add(file);
+                }
+
             }
 
             return result;
@@ -94,6 +99,13 @@ namespace Presentation_Day_Generator
                 excelFiles.Remove(file);
             }
         }
+
+
+        private void lstFiles_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effects = DragDropEffects.Copy;
+        }
+
 
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation_Day_Generator"
         mc:Ignorable="d"
-        Title="Presentation Day Generator" Height="537" Width="411" Loaded="Window_Loaded">
+        Title="Presentation Day Generator" Height="588.197" Width="411" Loaded="Window_Loaded">
 
     <Grid Background="#FFFF9C00">
 
@@ -14,16 +14,35 @@
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
             <RowDefinition />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
 
 
-        <Frame x:Name="pageFrame" Padding="0" Grid.Column="0" Grid.Row="0" NavigationUIVisibility="Hidden" />
+        <TextBlock x:Name="txbTitle" Foreground="White" TextAlignment="Center" FontSize="32" FontWeight="Medium">This is the title of the page</TextBlock>
 
-        <Button x:Name="btnNext" Grid.Column="0" Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
-            <Image Source="Images/next.png" />
-        </Button>
+        <Frame x:Name="pageFrame" Padding="0" Grid.Column="0" Grid.Row="1" NavigationUIVisibility="Visible" Navigated="pageFrame_Navigated" />
+
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">
+
+            <Button x:Name="btnPrevious" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnPrevious_Click">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Button.RenderTransform>
+                <Image Source="Images/next.png" />
+            </Button>
+            <Button x:Name="btnNext" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
+                <Image Source="Images/next.png" />
+            </Button>
+
+        </StackPanel>
+
 
 
     </Grid>

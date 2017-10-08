@@ -13,6 +13,7 @@
         <TextBlock>
             Drag in photo folders
         </TextBlock>
+        <ListBox></ListBox>
         
     </Grid>
 </Page>

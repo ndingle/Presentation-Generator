@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Presentation_Day_Generator.Pages
+namespace Presentation_Day_Generator
 {
     /// <summary>
     /// Interaction logic for Page3.xaml

@@ -24,38 +24,66 @@ namespace Presentation_Day_Generator
     {
 
         //The variables of niceness
-        List<ExcelFile> dataFiles;
+        string[] pageTitles = { "Drag and drop excel files", "2", "3" };
+        Page[] pages;
+        int currentPage = 0;
 
 
         public MainWindow()
         {
             InitializeComponent();
+            pages = new Page[3];
+            pages[0] = new Page1();
+            pages[1] = new Page2();
+            pages[2] = new Page3();
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            //Load the first page
-            Page1 newPage = new Page1();
-            pageFrame.Content = newPage;
+            //Load pages into memory
+            UpdatePage();
             
         }
 
 
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
-
-            //Page1 to Page2 transition work
-            dataFiles = ((Page1)pageFrame.Content).GetFiles();
-
-            MessageBox.Show(dataFiles.Count.ToString());
-
-            Page2 newPage = new Page2();
-            pageFrame.Content = newPage;
-
+            currentPage++;
+            UpdatePage();
         }
 
 
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            currentPage--;
+            UpdatePage();
+        }
+
+
+        void UpdatePage()
+        {
+
+            if (currentPage > 2)
+                currentPage = 2;
+            else if (currentPage < 0)
+                currentPage = 0;
+
+            pageFrame.Navigate(pages[currentPage]);
+            txbTitle.Text = pageTitles[currentPage];
+
+            
+
+        }
+
+        private void pageFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            if (currentPage == 0)
+            {
+                MessageBox.Show((pageFrame.Content as Page1).lstFiles.Items.Count.ToString());
+            }
+        }
     }
+
 }
