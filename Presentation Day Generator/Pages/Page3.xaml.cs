@@ -24,5 +24,11 @@ namespace Presentation_Day_Generator
         {
             InitializeComponent();
         }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow settings = new SettingsWindow();
+            settings.ShowDialog();
+        }
     }
 }

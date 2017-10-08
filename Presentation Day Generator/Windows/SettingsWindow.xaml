@@ -3,37 +3,54 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="SettingsWindow" Height="473.012" Width="466.194">
-    <Grid>
-        <Button x:Name="btnSave" Content="_Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="47,316,0,0" IsDefault="True"/>
-        <Button x:Name="btnCancel" Content="_Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="234,316,0,0" IsCancel="True"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Student collection behaviour" VerticalAlignment="Top" Margin="10,10,0,0" FontWeight="Bold"/>
-        <RadioButton x:Name="optMerge" Content="Merge students from all files" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,31,0,0" GroupName="collection" IsChecked="True"/>
-        <RadioButton x:Name="optMaster" Content="Use single file as master" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,51,0,0" GroupName="collection"/>
-        <ComboBox x:Name="cmbMasterFile" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="20,71,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Picture naming format" VerticalAlignment="Top" Margin="10,106,0,0" FontWeight="Bold"/>
-        <TextBox x:Name="txtPictureNameFormat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{}{id}.jpg" VerticalAlignment="Top" Width="170" Margin="20,127,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Filename tags:" VerticalAlignment="Top" Margin="20,155,0,0" Height="20" Width="170"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,175,0,0" Height="20" Width="170" Text="• {id}"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,195,0,0" Height="20" Width="170" Text="• {firstname}"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="47,215,0,0" Height="20" Width="170" Text="• {lastname}"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Picture slide format" VerticalAlignment="Top" Margin="236,174,0,0" FontWeight="Bold"/>
-        <RadioButton x:Name="optMerge_Copy" Content="Single picture" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,220,0,0" GroupName="pictureSlide" IsChecked="True"/>
-        <RadioButton x:Name="optMaster_Copy" Content="Dual pictures" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="250,195,0,0" GroupName="pictureSlide" IsChecked="True"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Slideshow template" VerticalAlignment="Top" Margin="236,10,0,0" FontWeight="Bold"/>
-        <TextBox x:Name="txtTemplate" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="_blank.potx" VerticalAlignment="Top" Width="170" Margin="250,32,0,0"/>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Picture slide progression" VerticalAlignment="Top" Margin="236,74,0,0" FontWeight="Bold"/>
-        <ComboBox x:Name="cmbProgression" HorizontalAlignment="Left" VerticalAlignment="Top" Width="170" Margin="250,95,0,0" SelectedIndex="0">
-            <ComboBoxItem Content="Auto"/>
-            <ComboBoxItem Content="On click"/>
-        </ComboBox>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Auto progress after:" VerticalAlignment="Top" Margin="250,122,0,0" Height="20" Width="170"/>
-        <TextBox x:Name="txtAutoProgress" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="2" VerticalAlignment="Top" Width="170" Margin="250,142,0,0"/>
-        <TreeView HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="175" Margin="134,316,0,0">
-            <TreeViewItem Header="Student data behaviour" FontWeight="Bold">
-                <RadioButton Content="Merge students from all files" GroupName="StudentBehaviour" IsChecked="True"/>
-                <RadioButton Content="Use single file as master" GroupName="StudentBehaviour"/>
+    
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="HeadingBackground">#FFFF9300</SolidColorBrush>
+        
+        <Style TargetType="TreeViewItem" BasedOn="{StaticResource TreeItem}">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Margin" Value="0,2,0,2" />
+            <Setter Property="Padding" Value="5,10,10,10" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+
+    </Window.Resources>
+
+    <Grid Background="#FFFF9C00">
+        
+        <TreeView Background="{x:Null}">
+            <TreeViewItem IsExpanded="True" Header="Student data behaviour" FontWeight="Bold" Background="{StaticResource HeadingBackground}">
+                <RadioButton x:Name="optMergeFiles" Content="Merge students from all files" GroupName="StudentBehaviour" IsChecked="True" FontWeight="Normal" />
+                <RadioButton x:Name="optMasterFile" Content="Use single file as master" GroupName="StudentBehaviour" FontWeight="Normal" />
+                <ComboBox x:Name="cmbFiles" />
+            </TreeViewItem>
+            <TreeViewItem FontWeight="Bold" Header="Picture naming format" Background="{StaticResource HeadingBackground}">
+                <TextBox FontWeight="Normal" Text="{}{id}.jpg"/>
+                <TextBlock FontWeight="Normal" Text="Filename tags:"/>
+                <TextBlock FontWeight="Normal" Text="    • {id}"/>
+                <TextBlock FontWeight="Normal" Text="    • {firstname}"/>
+                <TextBlock FontWeight="Normal" Text="    • {surname}"/>
+            </TreeViewItem>
+            <TreeViewItem FontWeight="Bold" Header="Slideshow template file" Background="{StaticResource HeadingBackground}">
+                <TextBox FontWeight="Normal" Text="_blank.potx"/>
+                <Button Content="Browse..." FontWeight="Normal"/>
+            </TreeViewItem>
+            <TreeViewItem FontWeight="Bold" Header="Picture slide progression" Background="{StaticResource HeadingBackground}">
+                <ComboBox FontWeight="Normal" SelectedIndex="0">
+                    <ComboBoxItem Content="Auto"/>
+                    <ComboBoxItem Content="On click"/>
+                </ComboBox>
+                <TextBlock FontWeight="Normal" Text="Auto progress after (seconds):"/>
+                <TextBox FontWeight="Normal" Text="2"/>
+            </TreeViewItem>
+            <TreeViewItem FontWeight="Bold" Header="Picture slide format" Background="{StaticResource HeadingBackground}">
+                <RadioButton Content="Dual picture" FontWeight="Normal" GroupName="PictureSlide" IsChecked="True"/>
+                <RadioButton Content="Single picture" FontWeight="Normal" GroupName="PictureSlide"/>
             </TreeViewItem>
         </TreeView>
 
