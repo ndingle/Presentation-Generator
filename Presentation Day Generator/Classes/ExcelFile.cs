@@ -23,7 +23,7 @@ namespace Presentation_Day_Generator
             set
             {
                 m_Filepath = value;
-                OnPropertyChanged("Filepath");
+                OnPropertyChanged();
             }
         }
 

@@ -24,7 +24,7 @@ namespace Presentation_Day_Generator
     {
 
         //The variables of niceness
-        string[] pageTitles = { "Drag and drop excel files", "2", "3" };
+        string[] pageTitles = { "Drag and drop excel files", "Drag and drop photo folders", "Ready, any settings?" };
         Page[] pages;
         int currentPage = 0;
 
@@ -77,13 +77,7 @@ namespace Presentation_Day_Generator
 
         }
 
-        private void pageFrame_Navigated(object sender, NavigationEventArgs e)
-        {
-            if (currentPage == 0)
-            {
-                MessageBox.Show((pageFrame.Content as Page1).lstFiles.Items.Count.ToString());
-            }
-        }
+
     }
 
 }

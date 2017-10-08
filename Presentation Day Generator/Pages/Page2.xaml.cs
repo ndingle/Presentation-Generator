@@ -24,5 +24,45 @@ namespace Presentation_Day_Generator
         {
             InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            lstPhotos.DataContext = Globals.photoFolders;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            if (btn.DataContext is PhotoFolder)
+            {
+                PhotoFolder file = (PhotoFolder)btn.DataContext;
+                Globals.photoFolders.Remove(file);
+            }
+        }
+
+        private void lstPhotos_Drop(object sender, DragEventArgs e)
+        {
+            CompleteDrop(e.Data);
+        }
+
+        void CompleteDrop(IDataObject data)
+        {
+
+            string[] files = (string[])data.GetData(DataFormats.FileDrop);
+
+            foreach (string file in files)
+            {
+
+                Globals.photoFolders.Add(new PhotoFolder(file));
+                //imgDragFiles.Visibility = Visibility.Hidden;
+
+            }
+
+        }
+
+        private void lstPhotos_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effects = DragDropEffects.Copy;
+        }
     }
 }

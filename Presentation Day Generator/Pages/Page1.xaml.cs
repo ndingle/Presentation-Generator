@@ -23,10 +23,6 @@ namespace Presentation_Day_Generator
     {
 
 
-        //Window variables go here!
-        ObservableCollection<ExcelFile> excelFiles;
-
-
         public Page1()
         {
             InitializeComponent();
@@ -35,8 +31,7 @@ namespace Presentation_Day_Generator
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            excelFiles = new ObservableCollection<ExcelFile>();
-            lstFiles.DataContext = excelFiles;
+            lstFiles.DataContext = Globals.excelFiles;
         }
 
 
@@ -48,8 +43,8 @@ namespace Presentation_Day_Generator
             //Ensure they are excel files
             foreach (string file in files)
             {
-                
-                excelFiles.Add(new ExcelFile(file));
+
+                Globals.excelFiles.Add(new ExcelFile(file));
                 //imgDragFiles.Visibility = Visibility.Hidden;
 
             }
@@ -74,10 +69,10 @@ namespace Presentation_Day_Generator
 
             List<ExcelFile> result = new List<ExcelFile>();
 
-            if (excelFiles != null)
+            if (Globals.excelFiles != null)
             {
 
-                foreach (ExcelFile file in excelFiles)
+                foreach (ExcelFile file in Globals.excelFiles)
                 {
                     if (file.Filetype.ToUpper() != "Invalid file")
                         result.Add(file);
@@ -96,7 +91,7 @@ namespace Presentation_Day_Generator
             if (btn.DataContext is ExcelFile)
             {
                 ExcelFile file = (ExcelFile)btn.DataContext;
-                excelFiles.Remove(file);
+                Globals.excelFiles.Remove(file);
             }
         }
 

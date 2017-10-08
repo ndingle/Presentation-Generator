@@ -6,14 +6,43 @@
       xmlns:local="clr-namespace:Presentation_Day_Generator"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="Page2">
+      Title="Page2" Loaded="Page_Loaded">
 
     <Grid>
+        
+        <ListBox x:Name="lstPhotos" 
+                 Background="{x:Null}" 
+                 Drop="lstPhotos_Drop" 
+                 AllowDrop="True"
+                 BorderBrush="{x:Null}" 
+                 ItemsSource="{Binding}"
+                 HorizontalContentAlignment="Stretch" DragEnter="lstPhotos_DragEnter">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
 
-        <TextBlock>
-            Drag in photo folders
-        </TextBlock>
-        <ListBox></ListBox>
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Image x:Name="imgFile" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Source="/Presentation Day Generator;component/Images/folder.png" />
+                        <TextBlock x:Name="txbFoldername" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" FontFamily="Segoe UI Light" FontSize="18" Text="{Binding FolderName}"></TextBlock>
+                        <TextBlock x:Name="txbValidtype" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Segoe UI Light" FontSize="18" Text="{Binding Validity}" Foreground="Yellow"></TextBlock>
+                        <Button x:Name="btnDelete" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right" FontFamily="Segoe UI Light" FontSize="18" Background="{x:Null}" Click="btnDelete_Click">🗑</Button>
+
+                    </Grid>
+
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         
     </Grid>
 </Page>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation_Day_Generator"
         mc:Ignorable="d"
-        Title="Presentation Day Generator" Height="588.197" Width="411" Loaded="Window_Loaded">
+        Title="Presentation Day Generator" Height="650.197" Width="446" Loaded="Window_Loaded">
 
     <Grid Background="#FFFF9C00">
 
@@ -22,7 +22,7 @@
 
         <TextBlock x:Name="txbTitle" Foreground="White" TextAlignment="Center" FontSize="32" FontWeight="Medium">This is the title of the page</TextBlock>
 
-        <Frame x:Name="pageFrame" Padding="0" Grid.Column="0" Grid.Row="1" NavigationUIVisibility="Visible" Navigated="pageFrame_Navigated" />
+        <Frame x:Name="pageFrame" Padding="0" Grid.Column="0" Grid.Row="1" NavigationUIVisibility="Hidden" />
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center">
 
@@ -42,7 +42,6 @@
             </Button>
 
         </StackPanel>
-
 
 
     </Grid>

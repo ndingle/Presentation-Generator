@@ -8,6 +8,6 @@
       Title="Page3">
 
     <Grid>
-        <TextBlock>Ready to go, settings?</TextBlock>
+        <Button Width="200" Height="100" Background="{x:Null}" FontSize="24" Foreground="White" BorderBrush="White" Click="btnSettings_Click">Settings</Button>
     </Grid>
 </Page>

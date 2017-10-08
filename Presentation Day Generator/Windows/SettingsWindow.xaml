@@ -22,6 +22,15 @@
     </Window.Resources>
 
     <Grid Background="#FFFF9C00">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
         
         <TreeView Background="{x:Null}">
             <TreeViewItem IsExpanded="True" Header="Student data behaviour" FontWeight="Bold" Background="{StaticResource HeadingBackground}">
@@ -53,6 +62,18 @@
                 <RadioButton Content="Single picture" FontWeight="Normal" GroupName="PictureSlide"/>
             </TreeViewItem>
         </TreeView>
+
+
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
+
+            <Button x:Name="btnPrevious" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnPrevious_Click">
+                <Image Source="/Presentation Day Generator;component/Images/tick.png" />
+            </Button>
+            <Button x:Name="btnNext" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
+                <Image Source="/Presentation Day Generator;component/Images/cross.png" />
+            </Button>
+
+        </StackPanel>
 
     </Grid>
 </Window>
