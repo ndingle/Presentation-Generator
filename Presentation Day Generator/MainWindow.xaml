@@ -38,7 +38,10 @@
                 <Image Source="Images/next.png" />
             </Button>
             <Button x:Name="btnNext" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
-                <Image Source="Images/next.png" />
+                <Image x:Name="imgNext" Source="Images/next.png" />
+            </Button>
+            <Button Visibility="Collapsed" x:Name="btnDone" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
+                <Image Source="Images/tick.png" />
             </Button>
 
         </StackPanel>

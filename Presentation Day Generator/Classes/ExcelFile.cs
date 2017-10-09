@@ -52,6 +52,11 @@ namespace Presentation_Day_Generator
 
         }
 
+        public override string ToString()
+        {
+            return Filename;
+        }
+
 
         protected void OnPropertyChanged([CallerMemberName] String propertyName = "")
         {

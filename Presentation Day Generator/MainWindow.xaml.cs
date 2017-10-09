@@ -73,7 +73,25 @@ namespace Presentation_Day_Generator
             pageFrame.Navigate(pages[currentPage]);
             txbTitle.Text = pageTitles[currentPage];
 
-            
+            if (currentPage == 2)
+            {
+                btnDone.Visibility = Visibility.Visible;
+                btnNext.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btnDone.Visibility = Visibility.Collapsed;
+                btnNext.Visibility = Visibility.Visible;
+            }
+
+            if (currentPage == 0)
+            {
+                btnPrevious.IsEnabled = false;
+            }
+            else
+            {
+                btnPrevious.IsEnabled = true;
+            }
 
         }
 

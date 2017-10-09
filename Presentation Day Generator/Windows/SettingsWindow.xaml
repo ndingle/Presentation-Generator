@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:System="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="473.012" Width="466.194">
+        Title="SettingsWindow" Height="473.012" Width="466.194" Loaded="Window_Loaded">
     
     <Window.Resources>
 
@@ -34,42 +34,39 @@
         
         <TreeView Background="{x:Null}">
             <TreeViewItem IsExpanded="True" Header="Student data behaviour" FontWeight="Bold" Background="{StaticResource HeadingBackground}">
-                <RadioButton x:Name="optMergeFiles" Content="Merge students from all files" GroupName="StudentBehaviour" IsChecked="True" FontWeight="Normal" />
-                <RadioButton x:Name="optMasterFile" Content="Use single file as master" GroupName="StudentBehaviour" FontWeight="Normal" />
-                <ComboBox x:Name="cmbFiles" />
+                <RadioButton x:Name="optMergeFiles" Content="Merge students from all files" GroupName="StudentBehaviour" IsChecked="True" FontWeight="Normal" Checked="optMergeFiles_Checked" />
+                <RadioButton x:Name="optMasterFile" Content="Use single file as master" GroupName="StudentBehaviour" FontWeight="Normal" Checked="optMasterFile_Checked" />
+                <ComboBox x:Name="cmbFiles" IsEnabled="False" FontWeight="Normal" />
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Picture naming format" Background="{StaticResource HeadingBackground}">
-                <TextBox FontWeight="Normal" Text="{}{id}.jpg"/>
+                <TextBox x:Name="txtFormat" FontWeight="Normal" Text="{}{id}.jpg"/>
                 <TextBlock FontWeight="Normal" Text="Filename tags:"/>
                 <TextBlock FontWeight="Normal" Text="    • {id}"/>
                 <TextBlock FontWeight="Normal" Text="    • {firstname}"/>
                 <TextBlock FontWeight="Normal" Text="    • {surname}"/>
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Slideshow template file" Background="{StaticResource HeadingBackground}">
-                <TextBox FontWeight="Normal" Text="_blank.potx"/>
+                <TextBox x:Name="txtTemplate" FontWeight="Normal" Text="_blank.potx"/>
                 <Button Content="Browse..." FontWeight="Normal"/>
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Picture slide progression" Background="{StaticResource HeadingBackground}">
-                <ComboBox FontWeight="Normal" SelectedIndex="0">
-                    <ComboBoxItem Content="Auto"/>
-                    <ComboBoxItem Content="On click"/>
-                </ComboBox>
-                <TextBlock FontWeight="Normal" Text="Auto progress after (seconds):"/>
-                <TextBox FontWeight="Normal" Text="2"/>
+                <RadioButton x:Name="optOnClick" Content="On mouse click" GroupName="SlideProgression" FontWeight="Normal" Checked="optOnClick_Checked" />
+                <RadioButton x:Name="optAuto" Content="Automatically progress after (seconds):" GroupName="SlideProgression" IsChecked="true" FontWeight="Normal" Checked="optAuto_Checked" />
+                <TextBox x:Name="txtProgressTime" FontWeight="Normal" Text="2"/>
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Picture slide format" Background="{StaticResource HeadingBackground}">
-                <RadioButton Content="Dual picture" FontWeight="Normal" GroupName="PictureSlide" IsChecked="True"/>
-                <RadioButton Content="Single picture" FontWeight="Normal" GroupName="PictureSlide"/>
+                <RadioButton x:Name="optDualPicture" Content="Dual picture" FontWeight="Normal" GroupName="PictureSlide" IsChecked="True"/>
+                <RadioButton x:Name="optSinglePicture" Content="Single picture" FontWeight="Normal" GroupName="PictureSlide"/>
             </TreeViewItem>
         </TreeView>
 
 
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center">
 
-            <Button x:Name="btnPrevious" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnPrevious_Click">
+            <Button x:Name="btnSave" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Click="btnSave_Click">
                 <Image Source="/Presentation Day Generator;component/Images/tick.png" />
             </Button>
-            <Button x:Name="btnNext" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
+            <Button x:Name="btnCancel" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnCancel_Click">
                 <Image Source="/Presentation Day Generator;component/Images/cross.png" />
             </Button>
 
