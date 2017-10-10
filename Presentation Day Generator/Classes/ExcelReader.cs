@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace Presentation_Day_Generator
 {
-    class ExcelReader
+    public class ExcelReader
     {
 
         public static string GetFileExtension(string filepath)
@@ -68,6 +68,25 @@ namespace Presentation_Day_Generator
             return result;
 
         }
+
+
+        public List<Student> CollateAwards(ExcelFile[] files)
+        {
+
+            List<Student> result = new List<Student>();
+
+            foreach (ExcelFile file in files)
+            {
+
+                //Get the next line
+
+
+            }
+
+            return result;
+
+        }
+
 
     }
 }
