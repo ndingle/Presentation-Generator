@@ -38,6 +38,13 @@
                 <RadioButton x:Name="optMasterFile" Content="Use single file as master" GroupName="StudentBehaviour" FontWeight="Normal" Checked="optMasterFile_Checked" />
                 <ComboBox x:Name="cmbFiles" IsEnabled="False" FontWeight="Normal" />
             </TreeViewItem>
+            <TreeViewItem Header="Student Sort" FontWeight="Bold" Background="{StaticResource HeadingBackground}">
+                <ComboBox x:Name="cmbSort" FontWeight="Normal" SelectedIndex="0">
+                    <ComboBoxItem>Surname</ComboBoxItem>
+                    <ComboBoxItem>Firstname</ComboBoxItem>
+                    <ComboBoxItem>Id</ComboBoxItem>
+                </ComboBox>
+            </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Picture naming format" Background="{StaticResource HeadingBackground}">
                 <TextBox x:Name="txtFormat" FontWeight="Normal" Text="{}{id}.jpg"/>
                 <TextBlock FontWeight="Normal" Text="Filename tags:"/>

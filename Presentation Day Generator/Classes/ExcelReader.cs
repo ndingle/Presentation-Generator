@@ -70,20 +70,29 @@ namespace Presentation_Day_Generator
         }
 
 
-        public List<Student> CollateAwards(ExcelFile[] files)
+        public StudentCollection CollateAwards(ExcelFile[] files)
         {
 
-            List<Student> result = new List<Student>();
+            StudentCollection result = new StudentCollection();
 
+            //Loop through each file and return the result
             foreach (ExcelFile file in files)
             {
-
-                //Get the next line
-
-
+                result.AddRange(LoadStudentsFromFile(file));
             }
 
             return result;
+
+        }
+
+
+        public StudentRow[] LoadStudentsFromFile(ExcelFile file)
+        {
+
+            var excel = new ExcelQueryFactory(file.Filepath);
+            var students = from c in excel.Worksheet<StudentRow>(excel.GetWorksheetNames().First().ToString())
+                           select c;
+            return students.ToArray<StudentRow>();
 
         }
 

@@ -45,6 +45,7 @@
             </Button>
 
         </StackPanel>
+        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,163,0,0" Grid.Row="1" Click="Button_Click"/>
 
 
     </Grid>

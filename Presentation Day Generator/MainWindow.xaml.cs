@@ -42,8 +42,10 @@ namespace Presentation_Day_Generator
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            //Load pages into memory
             UpdatePage();
+
+            //TODO: Remove
+            Globals.excelFiles.Add(new ExcelFile(@"C:\Users\nicho\Documents\Visual Studio 2017\Projects\Presentation Day Generator\Presentation Day Generator\Test Data\awards.xls"));
             
         }
 
@@ -93,6 +95,14 @@ namespace Presentation_Day_Generator
                 btnPrevious.IsEnabled = true;
             }
 
+        }
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Remove
+            ExcelReader reader = new ExcelReader();
+            List<Student> students = reader.CollateAwards(Globals.excelFiles.ToArray()).ToList(StudentSort.Surname);
         }
 
 

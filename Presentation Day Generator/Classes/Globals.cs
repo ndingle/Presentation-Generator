@@ -31,6 +31,7 @@ namespace Presentation_Day_Generator
         public static string templateFile = "_blank.potx";
         public static SlideProgression slideProgression = new SlideProgression() { autoProgress = true, autoProgressTime = 2 };
         public static bool dualPictureSlide = true;
+        public static StudentSort sortMethod = StudentSort.Surname;
 
     }
 }

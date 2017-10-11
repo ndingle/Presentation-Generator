@@ -64,6 +64,9 @@ namespace Presentation_Day_Generator
             optDualPicture.IsChecked = Globals.dualPictureSlide;
             optSinglePicture.IsChecked = !Globals.dualPictureSlide;
 
+            //Sorted
+            cmbSort.SelectedIndex = (int)Globals.sortMethod;
+
         }
 
         private void optOnClick_Checked(object sender, RoutedEventArgs e)
@@ -92,6 +95,7 @@ namespace Presentation_Day_Generator
             Globals.slideProgression.autoProgress = optAuto.IsChecked.Value;
             float.TryParse(txtProgressTime.Text, out Globals.slideProgression.autoProgressTime);
             Globals.dualPictureSlide = optDualPicture.IsChecked.Value;
+            Globals.sortMethod = (StudentSort)cmbSort.SelectedIndex;
             this.Close();
         }
     }
