@@ -73,6 +73,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\Globals.cs" />
+    <Compile Include="Classes\PhotoCollector.cs" />
     <Compile Include="Classes\PhotoFolder.cs" />
     <Compile Include="Classes\PowerPointGenerator.cs" />
     <Compile Include="Classes\Student.cs" />

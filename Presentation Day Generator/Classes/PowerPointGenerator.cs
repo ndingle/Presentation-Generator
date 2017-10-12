@@ -19,7 +19,7 @@ namespace Presentation_Day_Generator
 
         public static string BLANK_POWERPOINT = @"Resources\_blank.potx";
 
-        public void Generate(string powerpointTemplate, List<Student> students, PowerPointProgress progress, PowerPointGenerationCompleted callback)
+        public void Generate(string powerpointTemplate, List<Student> students, PowerPointProgress progress, SlideProgression slideProgression, bool dualPictureSlide, PowerPointGenerationCompleted callback)
         {
 
             string powerPointfile = "";
@@ -32,7 +32,7 @@ namespace Presentation_Day_Generator
                 else powerPointfile = powerpointTemplate;
 
                 //Create the powerpoint
-                CreatePowerPoint(powerPointfile, students, progress);
+                CreatePowerPoint(powerPointfile, students, progress, slideProgression, dualPictureSlide);
 
                 callback(true);
 
@@ -46,7 +46,7 @@ namespace Presentation_Day_Generator
         }
 
 
-        static void CreatePowerPoint(string template, List<Student> students, PowerPointProgress progress)
+        static void CreatePowerPoint(string template, List<Student> students, PowerPointProgress progress, SlideProgression slideProgression, bool dualPictureSlide)
         {
 
             progress.Minimum = 0;
@@ -72,8 +72,9 @@ namespace Presentation_Day_Generator
                 //Loop through the students
                 foreach (Student student in students)
                 {
-                    //TODO: Add photo slides
-                    //Add the Award slide
+
+                    //Add slides
+                    AddPhotoSlide(presentation, student, slideProgression, dualPictureSlide);
                     AddAwardSlide(presentation, student);
 
                     //Increase progress values
@@ -90,6 +91,63 @@ namespace Presentation_Day_Generator
                 app = null;
 
             }
+
+        }
+
+
+        static void AddPhotoSlide(Presentation presentation, Student student, SlideProgression slideProgression, bool dualPictureSlide)
+        {
+
+            Slide currentSlide = presentation.Slides.Add(presentation.Slides.Count + 1, PpSlideLayout.ppLayoutText);
+            currentSlide.Shapes.Title.TextFrame.TextRange.Text = student.Firstname + " " + student.Surname;
+
+            //Dual pictures time
+            if (student.Photos.Count > 1 && dualPictureSlide)
+            {
+
+                Microsoft.Office.Interop.PowerPoint.Shape shp = currentSlide.Shapes.AddPicture(student.Photos[0], MsoTriState.msoFalse, MsoTriState.msoTrue, 50, 150);
+                shp.LockAspectRatio = MsoTriState.msoTrue;
+                shp.Width = 260f;
+
+                currentSlide.TimeLine.MainSequence.AddEffect(shp, MsoAnimEffect.msoAnimEffectFade, MsoAnimateByLevel.msoAnimateLevelNone, MsoAnimTriggerType.msoAnimTriggerWithPrevious);
+
+
+                Microsoft.Office.Interop.PowerPoint.Shape shp2 = currentSlide.Shapes.AddPicture(student.Photos[student.Photos.Count-1], MsoTriState.msoFalse, MsoTriState.msoTrue, 360, 150);
+                shp2.LockAspectRatio = MsoTriState.msoTrue;
+                shp2.Width = 260f;
+
+                currentSlide.TimeLine.MainSequence.AddEffect(shp2, MsoAnimEffect.msoAnimEffectFade, MsoAnimateByLevel.msoAnimateLevelNone, MsoAnimTriggerType.msoAnimTriggerAfterPrevious);
+
+            }
+            else if (student.Photos.Count == 1 || !dualPictureSlide)
+            {
+
+                Microsoft.Office.Interop.PowerPoint.Shape shp = currentSlide.Shapes.AddPicture(student.Photos[student.Photos.Count - 1], MsoTriState.msoFalse, MsoTriState.msoTrue, 0, 0);
+                shp.LockAspectRatio = MsoTriState.msoTrue;
+                shp.Width = 250;
+                shp.Top = 140;
+                shp.Left = 215;
+
+                //Add the animation to the object
+                currentSlide.TimeLine.MainSequence.AddEffect(shp, MsoAnimEffect.msoAnimEffectFade, MsoAnimateByLevel.msoAnimateLevelNone, MsoAnimTriggerType.msoAnimTriggerWithPrevious);
+
+            }
+
+            //Determine how they want to progress
+            if (slideProgression.autoProgress)
+            {
+                currentSlide.SlideShowTransition.AdvanceOnTime = MsoTriState.msoTrue;
+                currentSlide.SlideShowTransition.AdvanceTime = slideProgression.autoProgressTime;
+            }
+            else
+            {
+                currentSlide.SlideShowTransition.AdvanceOnClick = MsoTriState.msoTrue;
+            }
+
+
+            currentSlide.SlideShowTransition.EntryEffect = PpEntryEffect.ppEffectFadeSmoothly;
+            currentSlide.SlideShowTransition.Speed = PpTransitionSpeed.ppTransitionSpeedMedium;
+            currentSlide.SlideShowTransition.Duration = 1.5f;
 
         }
 

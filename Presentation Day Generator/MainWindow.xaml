@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Presentation_Day_Generator"
         mc:Ignorable="d"
-        Title="Presentation Day Generator" Height="650.197" Width="446" Loaded="Window_Loaded">
+        Title="Presentation Day Generator" Height="650.197" Width="446" Loaded="Window_Loaded" Closing="Window_Closing">
 
     <Grid Background="#FFFF9C00">
 
@@ -45,7 +45,7 @@
             </Button>
 
         </StackPanel>
-        <ProgressBar x:Name="proGeneration" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="421" SmallChange="1" Margin="10,213,0,0" Grid.Row="1" Maximum="{Binding Maximum}" Minimum="{Binding Minimum}" Value="{Binding Value}" Visibility="Collapsed"/>
+        <ProgressBar x:Name="proGeneration" Grid.Column="0" Grid.Row="2" SmallChange="1" Maximum="{Binding Maximum}" Minimum="{Binding Minimum}" Value="{Binding Value}" Visibility="Collapsed"/>
 
 
     </Grid>

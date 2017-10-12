@@ -70,15 +70,23 @@ namespace Presentation_Day_Generator
         }
 
 
-        public StudentCollection CollateAwards(ExcelFile[] files)
+        public static StudentCollection CollateAwards(ExcelFile[] files, DataBehaviour dataBehaviour)
         {
 
             StudentCollection result = new StudentCollection();
+            int count = 0;
 
             //Loop through each file and return the result
             foreach (ExcelFile file in files)
             {
-                result.AddRange(LoadStudentsFromFile(file));
+
+                //Do we add new students through merge or the master file index
+                bool addNewStudent = dataBehaviour.mergeFiles || (!dataBehaviour.mergeFiles && dataBehaviour.masterFile == count);
+
+                //Add the new student with settings
+                result.AddRange(LoadStudentsFromFile(file), addNewStudent);
+                count++;
+
             }
 
             return result;
@@ -86,7 +94,7 @@ namespace Presentation_Day_Generator
         }
 
 
-        public StudentRow[] LoadStudentsFromFile(ExcelFile file)
+        public static StudentRow[] LoadStudentsFromFile(ExcelFile file)
         {
 
             var excel = new ExcelQueryFactory(file.Filepath);

@@ -28,6 +28,7 @@ namespace Presentation_Day_Generator
         string[] pageTitles = { "Drag and drop excel files", "Drag and drop photo folders", "Ready, any settings?" };
         Page[] pages;
         int currentPage = 0;
+        bool generating = false;
         PowerPointProgress generationProgress = new PowerPointProgress();
 
 
@@ -49,6 +50,12 @@ namespace Presentation_Day_Generator
 
             //TODO: Remove
             Globals.excelFiles.Add(new ExcelFile(@"C:\Users\nicho\Documents\Visual Studio 2017\Projects\Presentation Day Generator\Presentation Day Generator\Test Data\awards.xls"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\7"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\8"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\9"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\10"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\11"));
+            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\12"));
             
         }
 
@@ -104,13 +111,15 @@ namespace Presentation_Day_Generator
         private void btnDone_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Implement the settings correctly
-            ExcelReader reader = new ExcelReader();
-            List<Student> students = reader.CollateAwards(Globals.excelFiles.ToArray()).ToList(StudentSort.Surname);
+            List<Student> students = ExcelReader.CollateAwards(Globals.excelFiles.ToArray(), Globals.dataBehaviour).ToList(StudentSort.Surname);
+            PhotoCollector.CollectPhotos(students, Globals.photoFolders.ToArray(), Globals.pictureNameFormat);
+
+            //Create the power point generator and callback function
             PowerPointGenerator generator = new PowerPointGenerator();
             PowerPointGenerationCompleted callback = GenerationCallback;
 
             //Create a thread with a callback
-            Thread generationThread = new Thread(() => generator.Generate(Globals.templateFile, students, generationProgress, callback));
+            Thread generationThread = new Thread(() => generator.Generate(Globals.templateFile, students, generationProgress, Globals.slideProgression, Globals.dualPictureSlide, callback));
             ThreadStart();
             generationThread.Start();
             
@@ -120,12 +129,13 @@ namespace Presentation_Day_Generator
         void GenerationCallback(bool result)
         {
             MessageBox.Show("Complete.");
-            ThreadFinish();
+            Dispatcher.Invoke(ThreadFinish);
         }
 
 
         void ThreadStart()
         {
+            generating = true;
             btnNext.IsEnabled = false;
             btnPrevious.IsEnabled = false;
             btnDone.IsEnabled = false;
@@ -136,13 +146,18 @@ namespace Presentation_Day_Generator
 
         void ThreadFinish()
         {
+            generating = false;
             btnNext.IsEnabled = true;
             btnPrevious.IsEnabled = true;
             btnDone.IsEnabled = true;
             proGeneration.Visibility = Visibility.Collapsed;
         }
 
-
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (generating)
+                e.Cancel = true;
+        }
     }
 
 }

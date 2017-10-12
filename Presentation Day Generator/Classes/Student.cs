@@ -17,14 +17,13 @@ namespace Presentation_Day_Generator
 
         private List<Student> m_Students;
 
-
         public StudentCollection()
         {
             m_Students = new List<Student>();
         }
 
 
-        public void Add(StudentRow student)
+        public void Add(StudentRow student, bool addNewStudents)
         {
             if (student != null)
             {
@@ -32,7 +31,7 @@ namespace Presentation_Day_Generator
                 Student newStudent = student.ToStudent();
 
                 //If student doesn't exist, convert and add, otherwise just add the award
-                if (!m_Students.Contains(newStudent))
+                if (!m_Students.Contains(newStudent) && addNewStudents)
                 {
                     m_Students.Add(newStudent);
                 }
@@ -64,10 +63,10 @@ namespace Presentation_Day_Generator
         }
 
 
-        public void AddRange(StudentRow[] students)
+        public void AddRange(StudentRow[] students, bool addNewStudents)
         {
             foreach (StudentRow student in students)
-                Add(student);
+                Add(student, addNewStudents);
         }
 
 
