@@ -46,26 +46,26 @@ namespace Presentation_Day_Generator
 
             cmbFiles.SelectedIndex = 0;
 
-            optMergeFiles.IsChecked = Globals.dataBehaviour.mergeFiles;
-            optMasterFile.IsChecked = !Globals.dataBehaviour.mergeFiles;
+            optMergeFiles.IsChecked = Globals.dataSettings.mergeFiles;
+            optMasterFile.IsChecked = !Globals.dataSettings.mergeFiles;
 
             //Setup picture format
             txtFormat.Text = Globals.pictureNameFormat;
 
             //Setup template file
-            txtTemplate.Text = Globals.templateFile;
+            txtTemplate.Text = Globals.slideshowSettings.templateFilename;
 
             //Setup progression style
-            optAuto.IsChecked = Globals.slideProgression.autoProgress;
-            optOnClick.IsChecked = !Globals.slideProgression.autoProgress;
-            txtProgressTime.Text = Globals.slideProgression.autoProgressTime.ToString();
+            optAuto.IsChecked = Globals.slideshowSettings.autoProgress;
+            optOnClick.IsChecked = !Globals.slideshowSettings.autoProgress;
+            txtProgressTime.Text = Globals.slideshowSettings.autoProgressTime.ToString();
 
             //Setup slide format
-            optDualPicture.IsChecked = Globals.dualPictureSlide;
-            optSinglePicture.IsChecked = !Globals.dualPictureSlide;
+            optDualPicture.IsChecked = Globals.slideshowSettings.dualPictureSlides;
+            optSinglePicture.IsChecked = !Globals.slideshowSettings.dualPictureSlides;
 
             //Sorted
-            cmbSort.SelectedIndex = (int)Globals.sortMethod;
+            cmbSort.SelectedIndex = (int)Globals.dataSettings.sortingMethod;
 
         }
 
@@ -88,15 +88,20 @@ namespace Presentation_Day_Generator
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Globals.dataBehaviour.mergeFiles = optMergeFiles.IsChecked.Value;
-            Globals.dataBehaviour.masterFile = cmbFiles.SelectedIndex;
+
+            Globals.dataSettings.mergeFiles = optMergeFiles.IsChecked.Value;
+            Globals.dataSettings.masterFile = cmbFiles.SelectedIndex;
+            Globals.dataSettings.sortingMethod = (StudentSort)cmbSort.SelectedIndex;
+
             Globals.pictureNameFormat = txtFormat.Text;
-            Globals.templateFile = txtTemplate.Text;
-            Globals.slideProgression.autoProgress = optAuto.IsChecked.Value;
-            float.TryParse(txtProgressTime.Text, out Globals.slideProgression.autoProgressTime);
-            Globals.dualPictureSlide = optDualPicture.IsChecked.Value;
-            Globals.sortMethod = (StudentSort)cmbSort.SelectedIndex;
+
+            Globals.slideshowSettings.templateFilename = txtTemplate.Text;
+            Globals.slideshowSettings.autoProgress = optAuto.IsChecked.Value;
+            Globals.slideshowSettings.dualPictureSlides = optDualPicture.IsChecked.Value;
+            float.TryParse(txtProgressTime.Text, out Globals.slideshowSettings.autoProgressTime);
+
             this.Close();
+
         }
     }
 }

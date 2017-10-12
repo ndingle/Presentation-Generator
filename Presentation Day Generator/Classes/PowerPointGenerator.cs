@@ -19,20 +19,20 @@ namespace Presentation_Day_Generator
 
         public static string BLANK_POWERPOINT = @"Resources\_blank.potx";
 
-        public void Generate(string powerpointTemplate, List<Student> students, PowerPointProgress progress, SlideProgression slideProgression, bool dualPictureSlide, PowerPointGenerationCompleted callback)
+        public void Generate(SlideshowSettings settings, List<Student> students, PowerPointProgressBar progress, PowerPointGenerationCompleted callback)
         {
 
             string powerPointfile = "";
 
-            if (powerpointTemplate != null && powerpointTemplate.Length > 0)
+            if (settings.templateFilename != null && settings.templateFilename.Length > 0)
             {
 
                 //If they are using the blank powerpoint use the resource one
-                if (powerpointTemplate.ToUpper() == "_BLANK.POTX") powerPointfile = $@"{AppDomain.CurrentDomain.BaseDirectory}\{BLANK_POWERPOINT}";
-                else powerPointfile = powerpointTemplate;
+                if (settings.templateFilename.ToUpper() == "_BLANK.POTX") powerPointfile = $@"{AppDomain.CurrentDomain.BaseDirectory}\{BLANK_POWERPOINT}";
+                else powerPointfile = settings.templateFilename;
 
                 //Create the powerpoint
-                CreatePowerPoint(powerPointfile, students, progress, slideProgression, dualPictureSlide);
+                CreatePowerPoint(powerPointfile, settings, students, progress);
 
                 callback(true);
 
@@ -46,7 +46,7 @@ namespace Presentation_Day_Generator
         }
 
 
-        static void CreatePowerPoint(string template, List<Student> students, PowerPointProgress progress, SlideProgression slideProgression, bool dualPictureSlide)
+        static void CreatePowerPoint(string template, SlideshowSettings settings, List<Student> students, PowerPointProgressBar progress)
         {
 
             progress.Minimum = 0;
@@ -74,7 +74,7 @@ namespace Presentation_Day_Generator
                 {
 
                     //Add slides
-                    AddPhotoSlide(presentation, student, slideProgression, dualPictureSlide);
+                    AddPhotoSlide(settings, presentation, student);
                     AddAwardSlide(presentation, student);
 
                     //Increase progress values
@@ -85,7 +85,7 @@ namespace Presentation_Day_Generator
                 //Save time
                 presentation.SaveAs(dialog.FileName);
 
-                //TODO: Check memory clean
+                //Clean up memory I hope
                 presentation.Close();
                 presentation = null;
                 app = null;
@@ -95,14 +95,14 @@ namespace Presentation_Day_Generator
         }
 
 
-        static void AddPhotoSlide(Presentation presentation, Student student, SlideProgression slideProgression, bool dualPictureSlide)
+        static void AddPhotoSlide(SlideshowSettings settings, Presentation presentation, Student student)
         {
 
             Slide currentSlide = presentation.Slides.Add(presentation.Slides.Count + 1, PpSlideLayout.ppLayoutText);
             currentSlide.Shapes.Title.TextFrame.TextRange.Text = student.Firstname + " " + student.Surname;
 
             //Dual pictures time
-            if (student.Photos.Count > 1 && dualPictureSlide)
+            if (student.Photos.Count > 1 && settings.dualPictureSlides)
             {
 
                 Microsoft.Office.Interop.PowerPoint.Shape shp = currentSlide.Shapes.AddPicture(student.Photos[0], MsoTriState.msoFalse, MsoTriState.msoTrue, 50, 150);
@@ -119,7 +119,7 @@ namespace Presentation_Day_Generator
                 currentSlide.TimeLine.MainSequence.AddEffect(shp2, MsoAnimEffect.msoAnimEffectFade, MsoAnimateByLevel.msoAnimateLevelNone, MsoAnimTriggerType.msoAnimTriggerAfterPrevious);
 
             }
-            else if (student.Photos.Count == 1 || !dualPictureSlide)
+            else if (student.Photos.Count == 1 || !settings.dualPictureSlides)
             {
 
                 Microsoft.Office.Interop.PowerPoint.Shape shp = currentSlide.Shapes.AddPicture(student.Photos[student.Photos.Count - 1], MsoTriState.msoFalse, MsoTriState.msoTrue, 0, 0);
@@ -134,10 +134,10 @@ namespace Presentation_Day_Generator
             }
 
             //Determine how they want to progress
-            if (slideProgression.autoProgress)
+            if (settings.autoProgress)
             {
                 currentSlide.SlideShowTransition.AdvanceOnTime = MsoTriState.msoTrue;
-                currentSlide.SlideShowTransition.AdvanceTime = slideProgression.autoProgressTime;
+                currentSlide.SlideShowTransition.AdvanceTime = settings.autoProgressTime;
             }
             else
             {
@@ -179,7 +179,7 @@ namespace Presentation_Day_Generator
     }
 
 
-    public class PowerPointProgress : INotifyPropertyChanged
+    public class PowerPointProgressBar : INotifyPropertyChanged
     {
 
         private double m_Minimum;
