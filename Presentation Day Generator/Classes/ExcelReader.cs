@@ -24,7 +24,7 @@ namespace Presentation_Day_Generator
         {
 
             string extension = GetFileExtension(filepath).ToUpper();
-            string result = "Invalid file";
+            string result = "Invalid";
 
             var excel = new ExcelQueryFactory(filepath);
 
@@ -79,6 +79,9 @@ namespace Presentation_Day_Generator
             //Loop through each file and return the result
             foreach (ExcelFile file in files)
             {
+
+                //If it's invalid, move
+                if (file.Filetype.ToLower() == "invalid") continue;
 
                 //Do we add new students through merge or the master file index
                 bool addNewStudent = dataBehaviour.mergeFiles || (!dataBehaviour.mergeFiles && dataBehaviour.masterFile == count);

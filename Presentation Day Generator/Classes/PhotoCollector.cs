@@ -16,6 +16,8 @@ namespace Presentation_Day_Generator
             //Now load all the folders
             foreach (PhotoFolder folder in photoFolders)
             {
+                if (folder.Validity.ToLower() == "invalid") continue;
+
                 EnumerateFolder(folder, students, filenameFormat.ToLower());
             }
 

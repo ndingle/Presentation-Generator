@@ -54,7 +54,7 @@ namespace Presentation_Day_Generator
             {
 
                 Globals.photoFolders.Add(new PhotoFolder(file));
-                //imgDragFiles.Visibility = Visibility.Hidden;
+                imgDragFiles.Visibility = Visibility.Hidden;
 
             }
 
@@ -63,6 +63,11 @@ namespace Presentation_Day_Generator
         private void lstPhotos_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effects = DragDropEffects.Copy;
+        }
+
+        private void imgDragFiles_Drop(object sender, DragEventArgs e)
+        {
+            CompleteDrop(e.Data);
         }
     }
 }

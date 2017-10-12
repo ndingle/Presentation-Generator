@@ -37,7 +37,7 @@ namespace Presentation_Day_Generator
                 }
                 else
                 {
-                    (m_Students[m_Students.IndexOf(newStudent)] as Student).Awards.Add(student.Award);
+                    (m_Students[m_Students.IndexOf(newStudent)] as Student).Awards.Add(student.AwardOrActivity());
                 }
 
             }
@@ -124,6 +124,8 @@ namespace Presentation_Day_Generator
         public string Surname { get; set; }
         [ExcelColumn("Award")]
         public string Award { get; set; }
+        [ExcelColumn("Activity Name")]
+        public string ActivityName { get; set; }
 
         public Student ToStudent()
         {
@@ -133,15 +135,22 @@ namespace Presentation_Day_Generator
             student.Id = Id;
             student.Firstname = Firstname;
             student.Surname = Surname;
-            student.Awards.Add(Award);
+            student.Awards.Add(AwardOrActivity());
             return student;
 
         }
 
-        public static explicit operator Student(StudentRow obj)
+       
+        public string AwardOrActivity()
         {
-            return obj.ToStudent();
+            if (Award != null && Award.Length > 0)
+                return Award;
+            else if (ActivityName != null && ActivityName.Length > 0)
+                return ActivityName;
+            else
+                return "";
         }
+
 
     }
 

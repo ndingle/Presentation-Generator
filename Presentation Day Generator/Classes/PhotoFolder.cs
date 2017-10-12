@@ -49,7 +49,11 @@ namespace Presentation_Day_Generator
 
         public bool IsFolder()
         {
-            return File.GetAttributes(m_FolderPath).HasFlag(FileAttributes.Directory);
+            if (Directory.Exists(m_FolderPath))
+                return File.GetAttributes(m_FolderPath).HasFlag(FileAttributes.Directory);
+            else
+                return false;
+
         }
 
 

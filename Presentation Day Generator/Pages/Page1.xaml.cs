@@ -38,6 +38,7 @@ namespace Presentation_Day_Generator
         void CompleteDrop(IDataObject data)
         {
 
+            
             string[] files = (string[])data.GetData(DataFormats.FileDrop);
 
             //Ensure they are excel files
@@ -45,7 +46,7 @@ namespace Presentation_Day_Generator
             {
 
                 Globals.excelFiles.Add(new ExcelFile(file));
-                //imgDragFiles.Visibility = Visibility.Hidden;
+                imgDragFiles.Visibility = Visibility.Hidden;
 
             }
 
@@ -54,6 +55,7 @@ namespace Presentation_Day_Generator
 
         private void lstFiles_Drop(object sender, DragEventArgs e)
         {
+            MessageBox.Show(e.Data.GetFormats()[0]);
             CompleteDrop(e.Data);
         }
 

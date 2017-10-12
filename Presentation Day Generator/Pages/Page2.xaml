@@ -9,7 +9,8 @@
       Title="Page2" Loaded="Page_Loaded">
 
     <Grid>
-        
+
+        <Image Grid.Column="0" Grid.Row="0" x:Name="imgDragFiles" AllowDrop="True" Drop="imgDragFiles_Drop"  Margin="50" Source="/Presentation Day Generator;component/Images/Drag and drop.png" />
         <ListBox x:Name="lstPhotos" 
                  Background="{x:Null}" 
                  Drop="lstPhotos_Drop" 

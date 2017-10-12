@@ -146,7 +146,7 @@
     <None Include="Resources\_blank.potx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Test Data\Awards Report.xls" />
+    <None Include="Test Data\awards.xls" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
