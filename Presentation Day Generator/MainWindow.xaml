@@ -40,12 +40,12 @@
             <Button x:Name="btnNext" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
                 <Image x:Name="imgNext" Source="Images/next.png" />
             </Button>
-            <Button Visibility="Collapsed" x:Name="btnDone" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnNext_Click">
+            <Button Visibility="Collapsed" x:Name="btnDone" Margin="10,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Click="btnDone_Click">
                 <Image Source="Images/tick.png" />
             </Button>
 
         </StackPanel>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="175,163,0,0" Grid.Row="1" Click="Button_Click"/>
+        <ProgressBar x:Name="proGeneration" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="421" SmallChange="1" Margin="10,213,0,0" Grid.Row="1" Maximum="{Binding Maximum}" Minimum="{Binding Minimum}" Value="{Binding Value}" Visibility="Collapsed"/>
 
 
     </Grid>

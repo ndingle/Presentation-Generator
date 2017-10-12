@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Presentation_Day_Generator
 {
@@ -27,6 +28,7 @@ namespace Presentation_Day_Generator
         string[] pageTitles = { "Drag and drop excel files", "Drag and drop photo folders", "Ready, any settings?" };
         Page[] pages;
         int currentPage = 0;
+        PowerPointProgress generationProgress = new PowerPointProgress();
 
 
         public MainWindow()
@@ -43,6 +45,7 @@ namespace Presentation_Day_Generator
         {
 
             UpdatePage();
+            proGeneration.DataContext = generationProgress;
 
             //TODO: Remove
             Globals.excelFiles.Add(new ExcelFile(@"C:\Users\nicho\Documents\Visual Studio 2017\Projects\Presentation Day Generator\Presentation Day Generator\Test Data\awards.xls"));
@@ -98,11 +101,45 @@ namespace Presentation_Day_Generator
         }
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnDone_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Remove
+            //TODO: Implement the settings correctly
             ExcelReader reader = new ExcelReader();
             List<Student> students = reader.CollateAwards(Globals.excelFiles.ToArray()).ToList(StudentSort.Surname);
+            PowerPointGenerator generator = new PowerPointGenerator();
+            PowerPointGenerationCompleted callback = GenerationCallback;
+
+            //Create a thread with a callback
+            Thread generationThread = new Thread(() => generator.Generate(Globals.templateFile, students, generationProgress, callback));
+            ThreadStart();
+            generationThread.Start();
+            
+        }
+
+
+        void GenerationCallback(bool result)
+        {
+            MessageBox.Show("Complete.");
+            ThreadFinish();
+        }
+
+
+        void ThreadStart()
+        {
+            btnNext.IsEnabled = false;
+            btnPrevious.IsEnabled = false;
+            btnDone.IsEnabled = false;
+            proGeneration.Visibility = Visibility.Visible;
+
+        }
+
+
+        void ThreadFinish()
+        {
+            btnNext.IsEnabled = true;
+            btnPrevious.IsEnabled = true;
+            btnDone.IsEnabled = true;
+            proGeneration.Visibility = Visibility.Collapsed;
         }
 
 
