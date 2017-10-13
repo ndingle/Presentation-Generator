@@ -28,7 +28,7 @@ namespace Presentation_Day_Generator
             {
 
                 //If they are using the blank powerpoint use the resource one
-                if (settings.templateFilename.ToUpper() == "_BLANK.POTX") powerPointfile = $@"{AppDomain.CurrentDomain.BaseDirectory}\{BLANK_POWERPOINT}";
+                if (settings.templateFilename.ToLower() == "_blank.potx") powerPointfile = $@"{AppDomain.CurrentDomain.BaseDirectory}\{BLANK_POWERPOINT}";
                 else powerPointfile = settings.templateFilename;
 
                 //Create the powerpoint
