@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -101,6 +102,20 @@ namespace Presentation_Day_Generator
             float.TryParse(txtProgressTime.Text, out Globals.slideshowSettings.autoProgressTime);
 
             this.Close();
+
+        }
+
+        private void btnBrowse_Click(object sender, RoutedEventArgs e)
+        {
+
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Title = "Select PowerPoint Template...";
+            openDialog.Filter = "PowerPoint Templates|*.potx;*.pot";
+
+            if (openDialog.ShowDialog().Value == true)
+            {
+                txtTemplate.Text = openDialog.FileName;
+            }
 
         }
     }

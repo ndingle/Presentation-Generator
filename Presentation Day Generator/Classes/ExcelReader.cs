@@ -23,7 +23,7 @@ namespace Presentation_Day_Generator
         public static string GetFiletype(string filepath)
         {
 
-            string extension = GetFileExtension(filepath).ToUpper();
+            string extension = GetFileExtension(filepath).ToLower();
             string result = "Invalid";
 
             var excel = new ExcelQueryFactory(filepath);
@@ -32,7 +32,7 @@ namespace Presentation_Day_Generator
             {
                 string[] headers;
 
-                if (extension == "CSV")
+                if (extension == "csv")
                 {
                     headers = System.IO.File.ReadLines(filepath).First().Split(',');
                 }
@@ -101,9 +101,20 @@ namespace Presentation_Day_Generator
         {
 
             var excel = new ExcelQueryFactory(file.Filepath);
-            var students = from c in excel.Worksheet<StudentRow>(excel.GetWorksheetNames().First().ToString())
-                           select c;
-            return students.ToArray<StudentRow>();
+
+            if (GetFileExtension(file.Filepath).ToLower() == "csv")
+            {
+                var students = from c in excel.Worksheet<StudentRow>()
+                               select c;
+                return students.ToArray<StudentRow>();
+            }
+            else
+            {
+                var students = from c in excel.Worksheet<StudentRow>(excel.GetWorksheetNames().First().ToString())
+                               select c;
+                return students.ToArray<StudentRow>();
+            }
+            
 
         }
 

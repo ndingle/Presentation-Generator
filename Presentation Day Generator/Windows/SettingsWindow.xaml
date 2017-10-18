@@ -54,7 +54,7 @@
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Slideshow template file" Background="{StaticResource HeadingBackground}">
                 <TextBox x:Name="txtTemplate" FontWeight="Normal" Text="_blank.potx"/>
-                <Button Content="Browse..." FontWeight="Normal"/>
+                <Button x:Name="btnBrowse" Content="Browse..." FontWeight="Normal" Click="btnBrowse_Click"/>
             </TreeViewItem>
             <TreeViewItem FontWeight="Bold" Header="Picture slide progression" Background="{StaticResource HeadingBackground}">
                 <RadioButton x:Name="optOnClick" Content="On mouse click" GroupName="SlideProgression" FontWeight="Normal" Checked="optOnClick_Checked" />
