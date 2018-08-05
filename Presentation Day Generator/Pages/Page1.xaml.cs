@@ -55,8 +55,6 @@ namespace Presentation_Day_Generator
 
         private void lstFiles_Drop(object sender, DragEventArgs e)
         {
-            //TODO: Check file formats as they come in
-            //MessageBox.Show(e.Data.GetFormats()[0]);
             CompleteDrop(e.Data);
         }
 

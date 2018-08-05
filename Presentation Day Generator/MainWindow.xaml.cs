@@ -47,15 +47,6 @@ namespace Presentation_Day_Generator
 
             UpdatePage();
             proGeneration.DataContext = generationProgress;
-
-            //TODO: Remove
-            Globals.excelFiles.Add(new ExcelFile(@"C:\Users\nicho\Source\Repos\Presentation-Generator\Presentation Day Generator\Test Data\awards.xls"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\7"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\8"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\9"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\10"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\11"));
-            Globals.photoFolders.Add(new PhotoFolder(@"C:\Users\nicho\Desktop\Presentation\Photos\12"));
             
         }
 
